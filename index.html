@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#090b10" />
+  <meta name="description" content="Ainx AI — Ainfilms CRM for creative sales, leads, proposals and projects." />
+  <title>Ainx AI — Ainfilms CRM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand-wrap">
+        <div class="brand-mark">AX</div>
+        <div><div class="brand">Ainx AI</div><div class="brand-sub">AINFILMS CRM</div></div>
+      </div>
+      <nav class="nav" id="nav">
+        <button class="nav-item active" data-view="dashboard">◫ <span>Dashboard</span></button>
+        <button class="nav-item" data-view="leads">◎ <span>Leads</span></button>
+        <button class="nav-item" data-view="pipeline">⌘ <span>Pipeline</span></button>
+        <button class="nav-item" data-view="contacts">◉ <span>Contacts</span></button>
+        <button class="nav-item" data-view="outreach">↗ <span>Outreach</span></button>
+        <button class="nav-item" data-view="proposals">▤ <span>Proposals</span></button>
+        <button class="nav-item" data-view="projects">◇ <span>Projects</span></button>
+        <button class="nav-item" data-view="tasks">✓ <span>Tasks</span></button>
+        <button class="nav-item" data-view="analytics">⌁ <span>Analytics</span></button>
+        <button class="nav-item" data-view="settings">⚙ <span>Settings</span></button>
+      </nav>
+      <div class="sidebar-foot">
+        <div class="agent-chip"><span class="pulse"></span> Ainx Agent online</div>
+        <button id="themeBtn" class="ghost full">Toggle appearance</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="menu-btn" id="menuBtn">☰</button>
+        <div>
+          <div class="eyebrow">AINFILMS / SALES OS</div>
+          <h1 id="pageTitle">Command Center</h1>
+        </div>
+        <div class="top-actions">
+          <div class="search-box"><span>⌕</span><input id="globalSearch" placeholder="Search leads, clients, projects..." /></div>
+          <button class="btn secondary" id="quickAgentBtn">Ask Ainx</button>
+          <button class="btn primary" id="newLeadBtn">+ New lead</button>
+        </div>
+      </header>
+
+      <section class="view active" id="dashboard-view">
+        <div class="hero-panel">
+          <div>
+            <div class="eyebrow">REAL-TIME BUSINESS PULSE</div>
+            <h2>Move faster from <span>lead</span> to <span>paid.</span></h2>
+            <p>A single operating layer for Ainfilms prospects, proposals, follow-ups and productions across the UAE.</p>
+          </div>
+          <button class="btn primary" id="heroLeadBtn">Create opportunity</button>
+        </div>
+        <div class="metrics" id="metrics"></div>
+        <div class="dashboard-grid">
+          <article class="panel span-2">
+            <div class="panel-head"><div><div class="eyebrow">PIPELINE</div><h3>Revenue momentum</h3></div><button class="text-btn" data-jump="pipeline">Open pipeline →</button></div>
+            <div class="funnel" id="funnel"></div>
+          </article>
+          <article class="panel">
+            <div class="panel-head"><div><div class="eyebrow">AINX AGENT</div><h3>Next best moves</h3></div><span class="status">LIVE</span></div>
+            <div id="agentSuggestions" class="agent-list"></div>
+          </article>
+          <article class="panel span-2">
+            <div class="panel-head"><div><div class="eyebrow">ACTIVE OPPORTUNITIES</div><h3>Priority leads</h3></div><button class="text-btn" data-jump="leads">View all →</button></div>
+            <div class="table-wrap"><table><thead><tr><th>Account</th><th>Service</th><th>Value</th><th>Stage</th><th>Follow-up</th></tr></thead><tbody id="priorityRows"></tbody></table></div>
+          </article>
+          <article class="panel">
+            <div class="panel-head"><div><div class="eyebrow">TODAY</div><h3>Follow-up radar</h3></div></div>
+            <div id="todayTasks" class="task-stack"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="leads-view">
+        <div class="section-toolbar"><div><div class="eyebrow">CRM DATABASE</div><h2>Leads</h2></div><div class="toolbar-actions"><select id="leadFilter"><option value="all">All stages</option><option>New Lead</option><option>Qualified</option><option>Contacted</option><option>Meeting</option><option>Proposal Sent</option><option>Negotiation</option><option>Won</option><option>Lost</option></select><button class="btn primary" id="leadPageAdd">+ Add lead</button></div></div>
+        <div class="panel"><div class="table-wrap"><table><thead><tr><th>Company / Contact</th><th>Service</th><th>Value</th><th>Stage</th><th>Urgency</th><th>Next action</th><th></th></tr></thead><tbody id="leadRows"></tbody></table></div></div>
+      </section>
+
+      <section class="view" id="pipeline-view">
+        <div class="section-toolbar"><div><div class="eyebrow">DEAL FLOW</div><h2>Pipeline</h2></div><button class="btn primary" id="pipelineAdd">+ Opportunity</button></div>
+        <div class="kanban" id="kanban"></div>
+      </section>
+
+      <section class="view" id="contacts-view">
+        <div class="section-toolbar"><div><div class="eyebrow">RELATIONSHIPS</div><h2>Contacts</h2></div></div>
+        <div class="cards-grid" id="contactCards"></div>
+      </section>
+
+      <section class="view" id="outreach-view">
+        <div class="section-toolbar"><div><div class="eyebrow">OUTBOUND</div><h2>Outreach Studio</h2></div></div>
+        <div class="split-grid">
+          <article class="panel"><div class="panel-head"><div><div class="eyebrow">PERSONALIZE</div><h3>Message generator</h3></div></div><label>Lead<select id="outreachLead"></select></label><label>Channel<select id="outreachChannel"><option>Email</option><option>WhatsApp</option><option>LinkedIn</option></select></label><label>Goal<select id="outreachGoal"><option>Book a meeting</option><option>Follow up proposal</option><option>Pitch monthly content</option><option>Event coverage</option></select></label><button class="btn primary full" id="generateMessage">Generate message</button></article>
+          <article class="panel"><div class="panel-head"><div><div class="eyebrow">DRAFT</div><h3>Ainx-written outreach</h3></div><button class="text-btn" id="copyMessage">Copy</button></div><textarea id="messageOutput" class="message-output" placeholder="Select a lead and generate a tailored outreach message..."></textarea></article>
+        </div>
+      </section>
+
+      <section class="view" id="proposals-view">
+        <div class="section-toolbar"><div><div class="eyebrow">COMMERCIAL</div><h2>Proposals</h2></div><button class="btn primary" id="proposalAdd">+ New proposal</button></div>
+        <div class="cards-grid" id="proposalCards"></div>
+      </section>
+
+      <section class="view" id="projects-view">
+        <div class="section-toolbar"><div><div class="eyebrow">DELIVERY</div><h2>Projects</h2></div><button class="btn primary" id="projectAdd">+ Project</button></div>
+        <div class="cards-grid" id="projectCards"></div>
+      </section>
+
+      <section class="view" id="tasks-view">
+        <div class="section-toolbar"><div><div class="eyebrow">EXECUTION</div><h2>Tasks</h2></div><button class="btn primary" id="taskAdd">+ Task</button></div>
+        <div class="panel"><div id="taskList" class="task-list"></div></div>
+      </section>
+
+      <section class="view" id="analytics-view">
+        <div class="section-toolbar"><div><div class="eyebrow">PERFORMANCE</div><h2>Analytics</h2></div></div>
+        <div class="metrics" id="analyticsMetrics"></div>
+        <div class="split-grid"><article class="panel"><div class="panel-head"><h3>Lead source performance</h3></div><div id="sourceBars" class="bar-chart"></div></article><article class="panel"><div class="panel-head"><h3>Service demand</h3></div><div id="serviceBars" class="bar-chart"></div></article></div>
+      </section>
+
+      <section class="view" id="settings-view">
+        <div class="section-toolbar"><div><div class="eyebrow">WORKSPACE</div><h2>Settings</h2></div></div>
+        <div class="split-grid"><article class="panel"><h3>Company profile</h3><label>Brand<input value="Ainfilms" /></label><label>Market<input value="Dubai, UAE" /></label><label>Currency<input value="AED" /></label><label>Tagline<input value="Creating timeless looks" /></label><button class="btn secondary">Save profile</button></article><article class="panel"><div class="panel-head"><h3>Service presets</h3></div><div id="serviceSettings"></div></article></div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="leadModal">
+    <div class="modal">
+      <div class="panel-head"><div><div class="eyebrow">NEW OPPORTUNITY</div><h3>Add lead</h3></div><button class="icon-btn close-modal">×</button></div>
+      <form id="leadForm" class="form-grid">
+        <label>Company<input name="company" required placeholder="Company name" /></label>
+        <label>Contact person<input name="contact" required placeholder="Full name" /></label>
+        <label>Email<input name="email" type="email" placeholder="name@company.com" /></label>
+        <label>Phone<input name="phone" placeholder="+971 ..." /></label>
+        <label>Service<select name="service"><option>Corporate Videography</option><option>Event Coverage</option><option>Photography</option><option>Social Content</option><option>Video Editing</option><option>Monthly Content</option><option>Website Creation</option><option>Branding</option><option>AI Content</option></select></label>
+        <label>Value (AED)<input name="value" type="number" min="0" value="3500" /></label>
+        <label>Source<select name="source"><option>LinkedIn</option><option>Instagram</option><option>Referral</option><option>Website</option><option>Event</option><option>Outbound</option></select></label>
+        <label>Urgency<select name="urgency"><option>Hot</option><option selected>Warm</option><option>Cold</option></select></label>
+        <label class="span-2">Notes<textarea name="notes" placeholder="What do they need, when, and why now?"></textarea></label>
+        <div class="modal-actions span-2"><button type="button" class="btn ghost close-modal">Cancel</button><button class="btn primary" type="submit">Save lead</button></div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="agentModal">
+    <div class="modal compact"><div class="panel-head"><div><div class="eyebrow">AINX AGENT</div><h3>Sales copilot</h3></div><button class="icon-btn close-agent">×</button></div><div id="agentChat" class="chat-window"><div class="bot-msg">I can prioritize your pipeline, draft outreach and suggest the next move from your CRM data.</div></div><div class="chat-input"><input id="agentInput" placeholder="Ask: Which lead should I call first?" /><button class="btn primary" id="agentSend">Send</button></div></div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
