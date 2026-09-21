@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b1014" />
+  <meta name="description" content="Malayalam Dubayii — a realistic browser-based 3D Dubai exploration game." />
+  <title>Malayalam Dubayii — Explore Dubai</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <canvas id="world" aria-label="3D Dubai exploration world"></canvas>
+  <div id="vignette"></div>
+
+  <div class="boot" id="boot">
+    <div class="boot-card">
+      <div class="kicker">DUBAI · A LITTLE ESCAPE</div>
+      <h1>MALAYALAM<br><span>DUBAYII</span></h1>
+      <p>Walk Dubai, collect numbered finds, earn points, keep a travel balance and move between neighbourhoods by bus, metro and abra.</p>
+      <div class="boot-stats">
+        <div><span id="bootPoints">0</span><small>points</small></div>
+        <div><span id="bootBalance">AED 25</span><small>travel balance</small></div>
+      </div>
+      <button class="primary big" id="startBtn">Start exploring ↗</button>
+      <button class="link-btn" id="featureBtnBoot">Request feature</button>
+    </div>
+  </div>
+
+  <header class="hud-top" id="hudTop">
+    <div class="brand"><span class="dot"></span> MALAYALAM DUBAYII</div>
+    <div class="hud-stats">
+      <div><b id="points">0</b><span>PTS</span></div>
+      <div><b id="balance">AED 25.00</b><span>BALANCE</span></div>
+      <button class="icon-text" id="featureBtn">REQUEST FEATURE</button>
+    </div>
+  </header>
+
+  <aside class="district-card" id="districtCard">
+    <div class="kicker" id="districtKicker">DUBAI · GOLDEN HOUR</div>
+    <h2 id="districtName">Downtown Dubai</h2>
+    <p id="districtDesc">Iconic skyline, wide promenades and a cinematic place to begin.</p>
+    <div class="hint-row"><kbd>WASD</kbd> move <span>·</span> drag to look <span>·</span> <kbd>M</kbd> map</div>
+  </aside>
+
+  <div class="mission" id="missionCard">
+    <span>MISSION</span>
+    <b id="missionTitle">First Steps</b>
+    <p id="missionProgress">Collect 3 finds · 0/3</p>
+  </div>
+
+  <div class="crosshair" aria-hidden="true"><i></i><i></i></div>
+
+  <div class="bottom-bar" id="bottomBar">
+    <div class="prompt">
+      <span class="kicker">WHERE TO NEXT?</span>
+      <strong>Collect anything with a number</strong>
+      <small id="travelStatus">Walk to glowing finds or travel to another district.</small>
+    </div>
+    <div class="actions">
+      <button class="ghost" id="mapBtn">MAP <kbd>M</kbd></button>
+      <button class="ghost" id="cameraBtn">CAMERA <kbd>C</kbd></button>
+      <button class="primary" id="travelBtn">TRAVEL ↗</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <div class="collect-pop" id="collectPop"></div>
+
+  <div class="modal" id="travelModal" aria-hidden="true">
+    <div class="modal-card wide">
+      <div class="modal-head"><div><span class="kicker">DUBAI NETWORK</span><h3>Where to next?</h3></div><button class="close" data-close="travelModal">×</button></div>
+      <div class="travel-grid" id="travelGrid"></div>
+      <p class="legal-note">Game fares are fictional gameplay values. Routes and scenes are inspired by Dubai, not an official RTA product.</p>
+    </div>
+  </div>
+
+  <div class="modal" id="mapModal" aria-hidden="true">
+    <div class="modal-card map-card">
+      <div class="modal-head"><div><span class="kicker">CITY MAP</span><h3>Dubai Explorer</h3></div><button class="close" data-close="mapModal">×</button></div>
+      <div class="map-board" id="mapBoard"></div>
+      <div class="map-legend"><span><i class="live-dot"></i> current</span><span><i class="visited-dot"></i> visited</span><span><i class="locked-dot"></i> unvisited</span></div>
+    </div>
+  </div>
+
+  <div class="modal" id="featureModal" aria-hidden="true">
+    <div class="modal-card">
+      <div><div class="modal-head"><div><span class="kicker">BUILD WITH US</span><h3>Request a feature</h3></div><button class="close" data-close="featureModal">×</button></div>
+      <label>What should be added next?</label>
+      <textarea id="featureText" placeholder="Example: Add Karama night market, more buses, Arabic + Malayalam language switch..."></textarea>
+      <button class="primary full" id="saveFeatureBtn">Save request</button>
+    </div>
+  </div>
+
+  <div class="photo-flash" id="photoFlash"></div>
+  <div class="photo-frame" id="photoFrame"><span id="photoLabel">DOWNTOWN DUBAI · 19:18</span></div>
+
+  <div class="mobile-controls" id="mobileControls">
+    <div class="joystick" id="joystick"><div class="stick" id="stick"></div></div>
+    <div class="mobile-actions"><button id="mobileCamera">◌</button><button id="mobileMap">M</button><button id="mobileTravel">↗</button></div>
+  </div>
+
+  <div class="loader" id="loader"><div class="loader-line"><i></i></div><span>BUILDING DUBAI</span></div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
